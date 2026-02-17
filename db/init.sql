@@ -1,0 +1,23 @@
+CREATE TABLE IF NOT EXISTS writer (
+  id SERIAL PRIMARY KEY,
+  title TEXT NOT NULL,
+  birthDate INTEGER,
+  biography TEXT,
+  books TEXT[] NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS books (
+  id SERIAL PRIMARY KEY,
+  title TEXT NOT NULL,
+  summary TEXT,
+  isbn TEXT NOT NULL,
+  writer_id INTEGER NOT NULL REFERENCES writer(id) ON DELETE CASCADE
+);
+
+
+CREATE TABLE IF NOT EXISTS users (
+    id BIGSERIAL PRIMARY KEY,
+    username TEXT NOT NULL UNIQUE,
+    password TEXT NOT NULL,
+    role TEXT NOT NULL DEFAULT 'user'
+);
